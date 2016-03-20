@@ -75,28 +75,20 @@ EventDispatcher.prototype = {
 	},
 
 	dispatchEvent: function ( event ) {
-			
+
 		if ( this._listeners === undefined ) return;
 
-		var listeners = this._listeners;
-		var listenerArray = listeners[ event.type ];
+		var listenerArray = this._listeners[ event.type ];
 
 		if ( listenerArray !== undefined ) {
 
 			event.target = this;
 
-			var array = [];
 			var length = listenerArray.length;
 
 			for ( var i = 0; i < length; i ++ ) {
 
-				array[ i ] = listenerArray[ i ];
-
-			}
-
-			for ( var i = 0; i < length; i ++ ) {
-
-				array[ i ].call( this, event );
+				listenerArray[ i ].call( this, event );
 
 			}
 
